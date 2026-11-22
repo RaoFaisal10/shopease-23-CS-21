@@ -1,11 +1,11 @@
 {
-  "passed": 9,
-  "total": 9,
+  "passed": 29,
+  "total": 29,
   "checks": [
     {
       "check": "XML parsing",
       "passed": true,
-      "detail": "23 files"
+      "detail": "47 files"
     },
     {
       "check": "Android resource references",
@@ -20,7 +20,7 @@
     {
       "check": "Java syntax parse",
       "passed": true,
-      "detail": "Parsed Java files: 6"
+      "detail": "Parsed Java files: 15"
     },
     {
       "check": "Splash only launcher",
@@ -44,6 +44,106 @@
     },
     {
       "check": "Required package name",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 source Product.java",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 source CartItem.java",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 source ProductAdapter.java",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 source ProductDetailActivity.java",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 source CartAdapter.java",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 source CartActivity.java",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 source CheckoutActivity.java",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 layouts complete",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 menu available",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "A2 navigation registered",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Firestore product collection used",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Firestore cart subcollection used",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Real time cart listener",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Cart quantity transaction",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Atomic order and cart deletion",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Checkout field validation",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Delivery pricing policy",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Glide and RecyclerView dependencies",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Firestore rules match required collections",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "check": "Seed contains 8 products",
       "passed": true,
       "detail": ""
     }

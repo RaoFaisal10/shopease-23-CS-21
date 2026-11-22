@@ -1,0 +1,81 @@
+SHOPEASE — ASSIGNMENT 2 (JAVA + XML + FIREBASE)
+
+This is the complete extension of the existing ShopEase Assignment 1 project.
+It includes the existing Splash, Login and Sign Up source and configured
+Android Firebase client file app/google-services.json.
+
+IMPORTANT — TWO THINGS MUST HAPPEN IN YOUR FIREBASE CONSOLE
+The Android app CANNOT seed the products itself: product writes are intentionally
+blocked for mobile users by the assignment's Firestore security rules.
+
+1. In Firebase Console > Shop Ease > Firestore Database > Data:
+   Create collection ID exactly: products
+   Add at least eight documents with Auto-ID. For each document copy the six
+   fields from firebase/products_seed.json (CSV included as a convenience):
+       title       String
+       description String
+       category    String
+       price       Number / Integer (NOT a String)
+       stock       Number / Integer (NOT a String)
+       imageUrl    String (direct HTTPS image URL)
+   The sample products, prices and stocks match the assignment's table.
+   The Bluetooth Speaker intentionally has stock=4 for the low-stock test.
+   The sample photo URLs are public third-party Unsplash image URLs; online
+   access is needed, so test the URL in a browser and replace it if unavailable.
+   This project does not require a Firebase Storage paid plan.
+
+2. Firestore Database > Rules:
+   Replace the current rules with contents of the root file firebase.rules.
+   Click PUBLISH. This keeps the Assignment 1 user rules and grants signed-in
+   users access only to their own cart and orders. The project does not deploy
+   rules automatically by opening Android Studio.
+
+   IMPORTANT: When both Products and Cart show PERMISSION_DENIED, the most common
+   cause is that Firebase Console still uses the Assignment 1 users-only rules.
+   Do NOT replace the rules with allow read, write: if true. Publish the secure
+   Assignment 2 rules and tap Try again on both screens. Empty products normally
+   show an empty collection state, NOT a permission error. Use the same Firebase
+   project as app/google-services.json and the (default) Firestore database.
+   For precise diagnostics use Android Studio Logcat filter: ShopEaseFirestore.
+
+   Password reset: after Firebase accepts the request, ShopEase displays a
+   persistent "Password reset link sent" dialog showing the email address.
+
+ANDROID STUDIO
+ - Extract ZIP. Open the ShopEase directory (the one with settings.gradle.kts).
+ - Use Gradle JDK recommended by your Android Studio for the existing project.
+ - Let Gradle sync (first sync downloads Glide 4.16.0 and RecyclerView 1.4.0).
+ - Select an Android emulator/device (min SDK 26), press Run.
+ - Log in with the Firebase account you created in Assignment 1.
+ - Open Products -> Product Detail -> Add to bag -> Cart -> Checkout.
+ - Test order creation in Firestore > orders and that carts/{uid}/items is empty.
+
+REQUIRED TESTS BEFORE GITHUB
+ - Products show in 2 columns with actual photos, price and category.
+ - Airplane mode triggers network retry (using Firestore Source.SERVER).
+ - Search and category filters work.
+ - Detail: quantity is limited between 1 and stock (4 on the speaker).
+ - Adding the same item again changes its quantity in one Firestore document.
+ - Cart plus/minus/remove update immediately and persist after restart.
+ - Delivery is Rs 200 when subtotal < 5000; free at Rs 5000+.
+ - Invalid address or phone number shows a form error.
+ - Order creates one Firestore order and deletes cart items in a single batch.
+ - Signup, login, password reset and logout still work from Assignment 1.
+
+GITHUB — DO NOT PUSH THE ENTIRE FINISHED PROJECT AS ONE ASSIGNMENT COMMIT
+This ZIP intentionally contains the COMPLETE finished source without .git.
+No GitHub push or pull request was created by this build.
+When ready for the next step, implement or apply its five milestones as separate
+commits, in manual order, on assignment-2 branched from current main:
+  1 chore(products): add product model, Glide and Firestore rules
+  2 feat(products): show product list from Firestore
+  3 feat(detail): add product detail with add to cart
+  4 feat(cart): add cart with quantities and totals
+  5 feat(checkout): add checkout and place order
+Each intermediate milestone MUST build and run before committing; placeholders
+for future screens are needed at stages 2 and 4. Only after that open PR,
+merge, make v2.0 release, and submit one-page A2_23-CS-21_report.pdf.
+
+VERSION: 2.0 | Application ID: pk.edu.nfciet.shopease
+NOTE: This archive is SOURCE CODE; APK compilation and live Firestore testing
+must occur in Android Studio against your Firebase project.
