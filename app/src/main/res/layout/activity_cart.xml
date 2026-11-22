@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
+ android:layout_width="match_parent" android:layout_height="match_parent"
+ android:orientation="vertical" android:background="@color/canvas">
+ <com.google.android.material.appbar.MaterialToolbar android:id="@+id/toolbar"
+  android:layout_width="match_parent" android:layout_height="56dp" android:background="@color/canvas"
+  app:title="Your bag" app:titleTextColor="@color/ink" app:contentInsetStart="12dp"/>
+ <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+  android:orientation="vertical" android:paddingHorizontal="23dp" android:paddingTop="12dp" android:paddingBottom="17dp">
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+       android:text="THE GOOD FINDS" android:textColor="@color/accent_deep" android:letterSpacing="0.13"
+       android:fontFamily="sans-serif-bold" android:textSize="10sp"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+       android:layout_marginTop="4dp" android:text="All together, now." android:fontFamily="sans-serif-black"
+       android:textColor="@color/ink" android:textSize="26sp"/>
+    <TextView android:id="@+id/tvItemCount" android:layout_width="match_parent" android:layout_height="wrap_content"
+       android:text="Your bag is ready" android:textColor="@color/muted" android:textSize="12sp"/>
+ </LinearLayout>
+ <FrameLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+  <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvCart"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:clipToPadding="false" android:paddingTop="8dp" android:paddingBottom="12dp"/>
+  <LinearLayout android:id="@+id/emptyPanel" android:layout_width="match_parent" android:layout_height="match_parent"
+     android:orientation="vertical" android:gravity="center" android:padding="24dp" android:visibility="gone">
+    <ImageView android:layout_width="104dp" android:layout_height="104dp"
+      android:src="@drawable/ic_a2_bag" android:contentDescription="Empty bag"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:text="Nothing in your bag, yet." android:layout_marginTop="13dp"
+      android:fontFamily="sans-serif-black" android:textSize="22sp" android:textColor="@color/ink" android:gravity="center"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_marginTop="6dp" android:gravity="center" android:text="Something lovely is waiting in the collection."
+      android:textSize="13sp" android:textColor="@color/muted"/>
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnBrowse"
+      android:layout_width="wrap_content" android:layout_height="50dp" android:layout_marginTop="20dp"
+      android:text="Explore collection" android:textAllCaps="false" android:textColor="@color/white"
+      app:backgroundTint="@color/brand_navy" app:cornerRadius="16dp"/>
+  </LinearLayout>
+  <ProgressBar android:id="@+id/progress" android:layout_width="38dp" android:layout_height="38dp"
+   android:layout_gravity="center" android:indeterminateTint="@color/brand_orange"/>
+  <LinearLayout android:id="@+id/cartErrorPanel" android:layout_width="match_parent"
+      android:layout_height="match_parent" android:orientation="vertical" android:gravity="center"
+      android:padding="24dp" android:background="@color/canvas" android:visibility="gone">
+    <ImageView android:layout_width="76dp" android:layout_height="76dp"
+        android:src="@drawable/ic_a2_bag" android:contentDescription="ShopEase bag"/>
+    <TextView android:id="@+id/tvCartErrorTitle" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginTop="12dp" android:gravity="center"
+        android:text="Couldn't load your bag" android:textColor="@color/ink"
+        android:fontFamily="sans-serif-black" android:textSize="19sp"/>
+    <TextView android:id="@+id/tvCartErrorBody" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginTop="7dp" android:gravity="center"
+        android:text="Please try again." android:textColor="@color/muted" android:textSize="13sp"/>
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnCartRetry"
+        android:layout_width="wrap_content" android:layout_height="48dp"
+        android:layout_marginTop="18dp" android:text="Try again" android:textAllCaps="false"
+        android:textColor="@color/white" app:cornerRadius="15dp"
+        app:backgroundTint="@color/brand_navy"/>
+  </LinearLayout>
+ </FrameLayout>
+ <com.google.android.material.card.MaterialCardView android:id="@+id/summaryPanel"
+   android:layout_width="match_parent" android:layout_height="wrap_content" app:cardBackgroundColor="@color/white"
+   app:cardCornerRadius="22dp" app:cardElevation="3dp" android:layout_marginHorizontal="13dp" android:layout_marginBottom="10dp">
+  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical"
+     android:paddingHorizontal="18dp" android:paddingTop="17dp" android:paddingBottom="16dp">
+    <TextView android:id="@+id/tvDeliveryHint" android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:background="@drawable/bg_a2_success" android:padding="12dp" android:text="Free delivery unlocks at Rs 5,000"
+      android:textColor="@color/success" android:textSize="12sp" android:fontFamily="sans-serif-bold"/>
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+      android:layout_marginTop="14dp" android:text="ORDER SUMMARY" android:textColor="@color/accent_deep"
+      android:fontFamily="sans-serif-bold" android:letterSpacing="0.12" android:textSize="10sp"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="10dp" android:orientation="horizontal">
+      <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Subtotal" android:textSize="14sp" android:textColor="@color/muted"/>
+      <TextView android:id="@+id/tvSubtotal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rs 0" android:textSize="14sp" android:textColor="@color/ink"/>
+    </LinearLayout>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="7dp" android:orientation="horizontal">
+      <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="Delivery" android:textSize="14sp" android:textColor="@color/muted"/>
+      <TextView android:id="@+id/tvDelivery" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Free" android:textSize="14sp" android:textColor="@color/success"/>
+    </LinearLayout>
+    <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginTop="12dp" android:background="@color/stroke_soft"/>
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="12dp" android:gravity="center_vertical" android:orientation="horizontal">
+      <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content" android:text="TOTAL" android:textColor="@color/ink"
+         android:fontFamily="sans-serif-black" android:textSize="15sp"/>
+      <TextView android:id="@+id/tvTotal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Rs 0" android:textColor="@color/ink"
+         android:fontFamily="sans-serif-black" android:textSize="22sp"/>
+    </LinearLayout>
+    <com.google.android.material.button.MaterialButton android:id="@+id/btnCheckout"
+       android:layout_width="match_parent" android:layout_height="54dp" android:layout_marginTop="13dp"
+       android:text="Continue to checkout" android:textAllCaps="false" android:fontFamily="sans-serif-bold"
+       android:textSize="15sp" android:textColor="@color/white" app:cornerRadius="17dp"
+       app:backgroundTint="@color/brand_navy" app:icon="@drawable/ic_a2_arrow" app:iconGravity="textEnd" app:iconTint="@color/white"/>
+  </LinearLayout>
+ </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

@@ -53,6 +53,31 @@ report('Internet permission', 'android.permission.INTERNET' in manifest)
 report('Firebase auth + Firestore implemented', all(x in java_source for x in ('signInWithEmailAndPassword','sendPasswordResetEmail','createUserWithEmailAndPassword','FirebaseFirestore','signOut()')))
 report('Firebase session splash routing', all(x in java_source for x in ('getCurrentUser()', 'postDelayed(navigate, 1500)')))
 report('Required package name', 'pk.edu.nfciet.shopease' in (root/'app/build.gradle.kts').read_text())
+# Assignment 2 source contract: do not claim live Firebase verification here.
+files={x.name:x.read_text() for x in java}
+for name in ('Product.java','CartItem.java','ProductAdapter.java','ProductDetailActivity.java',
+             'CartAdapter.java','CartActivity.java','CheckoutActivity.java'):
+ report('A2 source '+name,name in files)
+required_screens=['activity_product_list.xml','activity_product_detail.xml','activity_cart.xml',
+                  'activity_checkout.xml','item_product.xml','item_cart.xml']
+report('A2 layouts complete',all((res/'layout'/name).exists() for name in required_screens))
+report('A2 menu available',(res/'menu/menu_main.xml').exists())
+report('A2 navigation registered',all(('.'+n+'"') in manifest for n in (
+  'ProductDetailActivity','CartActivity','CheckoutActivity')))
+source=java_source
+report('Firestore product collection used','collection("products")' in source)
+report('Firestore cart subcollection used',all(x in source for x in ('collection("carts")','collection("items")')))
+report('Real time cart listener','addSnapshotListener(' in files.get('CartActivity.java',''))
+report('Cart quantity transaction','runTransaction(' in files.get('CartActivity.java',''))
+report('Atomic order and cart deletion',all(x in files.get('CheckoutActivity.java','') for x in (
+ 'WriteBatch', 'batch.set(', 'batch.delete(', 'batch.commit()')))
+report('Checkout field validation',r'03\\d{9}' in files.get('CheckoutActivity.java',''))
+report('Delivery pricing policy',all(x in files.get('ShopMoney.java','') for x in ('5000','200')))
+report('Glide and RecyclerView dependencies',all(x in (root/'app/build.gradle.kts').read_text() for x in (
+ 'com.github.bumptech.glide:glide', 'androidx.recyclerview:recyclerview')))
+report('Firestore rules match required collections',all(x in (root/'firebase.rules').read_text() for x in (
+ '/products/{id}', '/carts/{uid}/items/{itemId}', '/orders/{orderId}')))
+report('Seed contains 8 products',len(json.loads((root/'firebase/products_seed.json').read_text()))>=8)
 result={'passed':sum(x['passed'] for x in checks),'total':len(checks),'checks':checks}
 (root/'source-verification-results.json').write_text(json.dumps(result,indent=2))
 print(json.dumps({'passed':result['passed'],'total':result['total']}))

@@ -1,55 +1,118 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
- android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical"
- android:background="@drawable/bg_soft_page" android:paddingTop="18dp">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ xmlns:app="http://schemas.android.com/apk/res-auto"
+ android:layout_width="match_parent" android:layout_height="match_parent"
+ android:background="@color/canvas" android:orientation="vertical">
+ <com.google.android.material.appbar.MaterialToolbar android:id="@+id/toolbar"
+   android:layout_width="match_parent" android:layout_height="60dp"
+   android:background="@color/canvas" app:title="" app:contentInsetStart="16dp"
+   app:contentInsetEnd="12dp">
+    <LinearLayout android:layout_width="wrap_content" android:layout_height="match_parent"
+      android:orientation="horizontal" android:gravity="center_vertical">
+     <ImageView android:layout_width="38dp" android:layout_height="38dp" android:src="@drawable/ic_shop_logo" android:contentDescription="ShopEase logo"/>
+     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+       android:layout_marginStart="3dp" android:text="ShopEase" android:textSize="23sp"
+       android:fontFamily="sans-serif-black" android:textColor="@color/brand_navy"/>
+    </LinearLayout>
+ </com.google.android.material.appbar.MaterialToolbar>
  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-  android:orientation="horizontal" android:gravity="center_vertical" android:paddingLeft="24dp" android:paddingRight="24dp">
-  <ImageView android:layout_width="42dp" android:layout_height="42dp" android:src="@drawable/ic_shop_logo"
-    android:contentDescription="@string/app_name"/>
-  <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3dp"
-    android:text="@string/app_name" android:textColor="@color/ink" android:fontFamily="sans-serif-black"
-    android:textSize="23sp"/>
+   android:orientation="vertical" android:paddingHorizontal="22dp">
+   <TextView android:id="@+id/tvGreeting" android:layout_width="match_parent" android:layout_height="wrap_content"
+     android:layout_marginTop="11dp" android:text="GOOD THINGS ARE HERE" android:textSize="10sp"
+     android:fontFamily="sans-serif-bold" android:letterSpacing="0.14" android:textColor="@color/accent_deep"/>
+   <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+     android:layout_marginTop="3dp" android:text="Find your kind of happy." android:textColor="@color/ink"
+     android:fontFamily="sans-serif-black" android:textSize="26sp" android:letterSpacing="-0.035"/>
+   <FrameLayout android:layout_width="match_parent" android:layout_height="106dp"
+     android:layout_marginTop="14dp" android:background="@drawable/bg_a2_hero">
+     <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent"
+       android:layout_marginStart="18dp" android:layout_marginTop="16dp" android:layout_marginEnd="122dp"
+       android:orientation="vertical">
+       <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+         android:text="THE EVERYDAY EDIT" android:textColor="@color/accent_deep"
+         android:fontFamily="sans-serif-bold" android:textSize="9sp" android:letterSpacing="0.15"/>
+       <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+         android:layout_marginTop="5dp" android:text="Small finds.\nBig smiles." android:textColor="@color/ink"
+         android:fontFamily="sans-serif-black" android:textSize="19sp" android:lineSpacingExtra="-1dp"/>
+     </LinearLayout>
+     <pk.edu.nfciet.shopease.ShopArtworkView android:layout_width="136dp" android:layout_height="100dp"
+        android:layout_gravity="end|center_vertical" android:layout_marginEnd="4dp"/>
+   </FrameLayout>
+   <com.google.android.material.textfield.TextInputLayout android:layout_width="match_parent"
+     android:layout_height="wrap_content" android:layout_marginTop="14dp"
+     style="@style/ShopTextField" app:startIconDrawable="@drawable/ic_search"
+     app:boxCornerRadiusTopStart="18dp" app:boxCornerRadiusTopEnd="18dp"
+     app:boxCornerRadiusBottomStart="18dp" app:boxCornerRadiusBottomEnd="18dp">
+     <com.google.android.material.textfield.TextInputEditText android:id="@+id/etSearch"
+       android:layout_width="match_parent" android:layout_height="wrap_content"
+       android:inputType="text" android:imeOptions="actionSearch" android:singleLine="true"
+       android:hint="Search the collection" android:textSize="13sp" android:minHeight="49dp"
+       android:paddingStart="8dp" android:textColor="@color/ink"/>
+   </com.google.android.material.textfield.TextInputLayout>
+   <HorizontalScrollView android:layout_width="match_parent" android:layout_height="wrap_content"
+     android:fillViewport="true" android:scrollbars="none">
+   <com.google.android.material.chip.ChipGroup android:id="@+id/categoryGroup"
+     android:layout_width="match_parent" android:layout_height="wrap_content"
+     android:layout_marginTop="7dp" app:singleSelection="true" app:selectionRequired="true"
+     app:singleLine="true" app:chipSpacingHorizontal="5dp">
+     <com.google.android.material.chip.Chip
+    android:id="@+id/chipAll" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="All finds" android:textSize="12sp" android:textColor="@color/category_chip_text"
+    android:fontFamily="sans-serif-bold" android:checkable="true" android:checked="true"
+    app:chipBackgroundColor="@color/category_chip_background" app:chipCornerRadius="18dp"
+    app:chipMinHeight="36dp" app:chipStrokeColor="@color/stroke_soft" app:chipStrokeWidth="1dp"
+    app:checkedIconVisible="false" app:ensureMinTouchTargetSize="true"/>
+<com.google.android.material.chip.Chip
+    android:id="@+id/chipClothing" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="Clothing" android:textSize="12sp" android:textColor="@color/category_chip_text"
+    android:fontFamily="sans-serif-bold" android:checkable="true" android:checked="false"
+    app:chipBackgroundColor="@color/category_chip_background" app:chipCornerRadius="18dp"
+    app:chipMinHeight="36dp" app:chipStrokeColor="@color/stroke_soft" app:chipStrokeWidth="1dp"
+    app:checkedIconVisible="false" app:ensureMinTouchTargetSize="true"/>
+<com.google.android.material.chip.Chip
+    android:id="@+id/chipElectronics" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="Electronics" android:textSize="12sp" android:textColor="@color/category_chip_text"
+    android:fontFamily="sans-serif-bold" android:checkable="true" android:checked="false"
+    app:chipBackgroundColor="@color/category_chip_background" app:chipCornerRadius="18dp"
+    app:chipMinHeight="36dp" app:chipStrokeColor="@color/stroke_soft" app:chipStrokeWidth="1dp"
+    app:checkedIconVisible="false" app:ensureMinTouchTargetSize="true"/>
+<com.google.android.material.chip.Chip
+    android:id="@+id/chipGrocery" android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:text="Grocery" android:textSize="12sp" android:textColor="@color/category_chip_text"
+    android:fontFamily="sans-serif-bold" android:checkable="true" android:checked="false"
+    app:chipBackgroundColor="@color/category_chip_background" app:chipCornerRadius="18dp"
+    app:chipMinHeight="36dp" app:chipStrokeColor="@color/stroke_soft" app:chipStrokeWidth="1dp"
+    app:checkedIconVisible="false" app:ensureMinTouchTargetSize="true"/>
+   </com.google.android.material.chip.ChipGroup>
+   </HorizontalScrollView>
+   <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+     android:orientation="horizontal" android:gravity="center_vertical"
+     android:layout_marginTop="8dp" android:layout_marginBottom="5dp">
+      <TextView android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+        android:text="Picked for you" android:textColor="@color/ink" android:fontFamily="sans-serif-black" android:textSize="19sp"/>
+      <TextView android:id="@+id/tvProductCount" android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:text="Explore our finds" android:textColor="@color/muted" android:textSize="11sp"/>
+   </LinearLayout>
  </LinearLayout>
- <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"
-   android:fillViewport="true">
-  <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:orientation="vertical" android:paddingLeft="26dp" android:paddingRight="26dp"
-    android:paddingTop="32dp" android:paddingBottom="20dp">
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-       android:text="@string/welcome_kicker" android:textColor="#B07732"
-       android:fontFamily="sans-serif-bold" android:letterSpacing="0.13" android:textSize="10sp"/>
-    <TextView android:id="@+id/tvHello" android:layout_width="match_parent" android:layout_height="wrap_content"
-       android:layout_marginTop="8dp" android:text="@string/hello_fallback" android:textColor="@color/ink"
-       android:fontFamily="sans-serif-black" android:textSize="36sp" android:letterSpacing="-0.04"/>
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-       android:layout_marginTop="5dp" android:text="@string/happy_here" android:textColor="@color/muted" android:textSize="14sp"/>
-    <FrameLayout android:layout_width="match_parent" android:layout_height="270dp" android:layout_marginTop="24dp"
-      android:background="@drawable/bg_cream_card" android:clipChildren="false">
-      <pk.edu.nfciet.shopease.ShopArtworkView android:tag="gift" android:layout_width="260dp"
-        android:layout_height="218dp" android:layout_gravity="center"/>
-      <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-       android:layout_gravity="top|left" android:layout_margin="20dp" android:paddingTop="8dp" android:paddingBottom="8dp"
-       android:paddingLeft="13dp" android:paddingRight="13dp"
-       android:background="@drawable/bg_border_pill" android:text="@string/coming_soon_chip" android:fontFamily="sans-serif-bold"
-       android:textSize="10sp" android:letterSpacing="0.12" android:textColor="@color/ink"/>
-    </FrameLayout>
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-      android:layout_marginTop="19dp" android:text="@string/coming_soon_headline"
-      android:textColor="@color/ink" android:fontFamily="sans-serif-black"
-      android:textSize="29sp" android:letterSpacing="-0.035"/>
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-      android:layout_marginTop="12dp" android:text="@string/products_soon" android:textColor="#B8782F"
-      android:fontFamily="sans-serif-bold" android:textSize="15sp"/>
-    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-      android:layout_marginTop="5dp" android:text="@string/products_description"
-      android:textColor="@color/muted" android:textSize="13sp" android:lineSpacingExtra="3dp"/>
+ <FrameLayout android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
+  <androidx.recyclerview.widget.RecyclerView android:id="@+id/rvProducts"
+    android:layout_width="match_parent" android:layout_height="match_parent" android:clipToPadding="false"
+    android:paddingLeft="14dp" android:paddingRight="14dp" android:paddingTop="4dp" android:paddingBottom="24dp"/>
+  <ProgressBar android:id="@+id/progress" android:layout_width="38dp" android:layout_height="38dp"
+    android:layout_gravity="center" android:indeterminateTint="@color/brand_orange"/>
+  <LinearLayout android:id="@+id/statePanel" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:gravity="center" android:orientation="vertical" android:padding="24dp" android:visibility="gone"
+    android:background="@color/canvas">
+      <ImageView android:layout_width="76dp" android:layout_height="76dp" android:src="@drawable/ic_a2_bag" android:contentDescription="ShopEase bag"/>
+      <TextView android:id="@+id/tvStateTitle" android:layout_width="match_parent" android:layout_height="wrap_content"
+         android:layout_marginTop="12dp" android:text="A little quiet in here" android:textColor="@color/ink"
+         android:textSize="19sp" android:fontFamily="sans-serif-black" android:gravity="center"/>
+      <TextView android:id="@+id/tvStateBody" android:layout_width="match_parent" android:layout_height="wrap_content"
+         android:layout_marginTop="7dp" android:text="Try again in a moment." android:textColor="@color/muted"
+         android:textSize="13sp" android:gravity="center"/>
+      <com.google.android.material.button.MaterialButton android:id="@+id/btnRetry"
+         android:layout_width="wrap_content" android:layout_height="48dp" android:layout_marginTop="18dp"
+         android:text="Try again" android:textAllCaps="false" android:textColor="@color/white"
+         app:cornerRadius="15dp" app:backgroundTint="@color/brand_navy"/>
   </LinearLayout>
- </ScrollView>
- <com.google.android.material.button.MaterialButton android:id="@+id/btnLogout"
-  android:layout_width="match_parent" android:layout_height="56dp"
-  android:layout_marginLeft="24dp" android:layout_marginRight="24dp" android:layout_marginBottom="18dp"
-  android:text="@string/log_out" android:textAllCaps="false" android:textSize="15sp"
-  android:textColor="@color/ink" android:fontFamily="sans-serif-bold"
-  app:cornerRadius="18dp" app:strokeWidth="1dp" app:strokeColor="@color/line"
-  app:backgroundTint="@color/white"/>
+ </FrameLayout>
 </LinearLayout>

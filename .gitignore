@@ -5,7 +5,11 @@ local.properties
 *.iml
 .DS_Store
 captures/
-# Firebase Android client configuration is committed for this assignment.
-# NEVER commit Firebase Admin SDK service-account JSON, passwords, or private keys.
-*-firebase-adminsdk-*.json
-service-account*.json
+# Firebase Android client config is included; never commit Admin SDK credentials.
+*firebase-adminsdk*.json
+*service-account*.json
+
+# Additional Firebase Admin key names and local import tooling
+serviceAccountKey.json
+*adminsdk*.json
+*service-account*.json

@@ -31,18 +31,20 @@ public final class GradleWrapperMain {
             prop.load(in);
         }
         String address = prop.getProperty("distributionUrl");
-        // Reject arbitrary binaries. This project pins the approved Gradle 8.13 binary distribution.
-        if (!"https://services.gradle.org/distributions/gradle-8.13-bin.zip".equals(address)) {
+        // Only allow official Gradle ZIPs, never arbitrary download URLs.
+        if (address == null || !address.matches("https://services\\.gradle\\.org/distributions/gradle-[0-9]+\\.[0-9]+(?:\\.[0-9]+)?-bin\\.zip")) {
             throw new IllegalStateException("Unexpected Gradle distribution URL: " + address);
         }
-        Path cache = Paths.get(System.getProperty("user.home"), ".gradle", "wrapper", "dists", "shopease-gradle-8.13");
-        Path gradle = cache.resolve("gradle-8.13");
+        String version = address.substring(address.lastIndexOf("/gradle-") + 8,
+                address.lastIndexOf("-bin.zip"));
+        Path cache = Paths.get(System.getProperty("user.home"), ".gradle", "wrapper", "dists", "shopease-gradle-" + version);
+        Path gradle = cache.resolve("gradle-" + version);
         boolean windows = System.getProperty("os.name").toLowerCase().contains("win");
         Path runner = gradle.resolve(windows ? "bin/gradle.bat" : "bin/gradle");
         if (!Files.isRegularFile(runner)) {
             Files.createDirectories(cache);
             Path zip = cache.resolve("download.zip");
-            System.out.println("ShopEase: downloading official Gradle 8.13 (first run only)...");
+            System.out.println("ShopEase: downloading official Gradle " + version + " (first run only)...");
             HttpClient client = HttpClient.newBuilder().followRedirects(HttpClient.Redirect.ALWAYS)
                     .connectTimeout(Duration.ofSeconds(30)).build();
             HttpRequest request = HttpRequest.newBuilder(URI.create(address))

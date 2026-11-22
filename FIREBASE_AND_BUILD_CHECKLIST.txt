@@ -1,19 +1,17 @@
-ShopEase — Firebase and Android build checklist
+ShopEase A2 preflight checklist
 
-1. Android Firebase application ID: pk.edu.nfciet.shopease.
-2. Android client configuration is committed as app/google-services.json.
-3. In Firebase Authentication, explicitly ENABLE Email/Password sign-in.
-4. Create Cloud Firestore, then PUBLISH firebase.rules in Firebase Console.
-5. Use Gradle 8.13 / JDK 17 / Android SDK 36; run the app on API 26+.
-6. Test sign-up, duplicate signup, invalid login, successful login, password-reset
-   email, Firestore users/{uid} profile save, personalized greeting, restart
-   logged-in session, and logout on your configured Firebase project.
-7. GitHub Actions builds a debug APK. The CI emulator smoke-test may fail due to
-   emulator resource/time limits; a successful APK compilation does not prove
-   that live Firebase signup works.
-8. GitHub assignment milestone history is preserved in assignment-1 and in
-   the non-squash merge to main (PR #1).
+[ ] Firestore products collection holds 8+ Auto-ID documents with the six
+    exact fields from firebase/products_seed.json.
+[ ] Firestore security rules from firebase.rules are PUBLISHED in console.
+[ ] Email/Password Authentication remains enabled from Assignment 1.
+[ ] Android Studio Gradle sync downloads Glide + RecyclerView successfully.
+[ ] Splash, Login, Sign Up and password reset still work.
+[ ] The 2-column product catalog displays images/prices and filters correctly.
+[ ] Product detail enforces stock limits, merges same cart item quantities.
+[ ] Live cart plus/minus/remove and empty state work after app restart.
+[ ] Delivery: Rs 200 below Rs 5000, Free at/above Rs 5000.
+[ ] Checkout validation, one batch order creation and cart clearing work.
+[ ] Android Studio reports BUILD SUCCESSFUL.
 
-Security: Firebase Android client config is for client apps and is not a Firebase
-Admin credential. Protect the backend with Firebase rules, appropriate API
-key restrictions, and usage limits. Never store service-account keys or passwords.
+Not done in this ZIP: GitHub assignment-2 branch or milestone commits, PR,
+v2.0 release, Classroom report/submission.

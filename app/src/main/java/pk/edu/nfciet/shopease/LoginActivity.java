@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
@@ -16,7 +18,9 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputEditText emailField, passwordField;
     private TextInputLayout emailLayout, passwordLayout;
     private MaterialButton loginButton;
+    private TextView forgotLink;
     private ProgressBar progress;
+    private boolean sendingReset;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,9 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         emailLayout = findViewById(R.id.tilEmail);
         passwordLayout = findViewById(R.id.tilPassword);
         loginButton = findViewById(R.id.btnLogin);
+        forgotLink = findViewById(R.id.tvForgot);
         progress = findViewById(R.id.progress);
         loginButton.setOnClickListener(v -> login());
-        findViewById(R.id.tvForgot).setOnClickListener(v -> resetPassword());
+        forgotLink.setOnClickListener(v -> resetPassword());
         findViewById(R.id.tvGoToSignUp).setOnClickListener(v ->
                 startActivity(new Intent(this, SignUpActivity.class)));
     }
@@ -63,6 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
     private void resetPassword() {
+        if (sendingReset) return;
         String email = entered(emailField);
         emailLayout.setError(null);
         if (!validEmail(email)) {
@@ -71,20 +77,39 @@ public class LoginActivity extends AppCompatActivity {
         if (!AppUi.isFirebaseReady(this)) {
             AppUi.message(this, getString(R.string.config_missing)); return;
         }
+        sendingReset = true;
+        forgotLink.setEnabled(false);
+        forgotLink.setText("Sending reset link…");
         setLoading(true);
         FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                 .addOnSuccessListener(this, unused -> {
-                    setLoading(false);
-                    AppUi.message(this, "Reset link sent to " + email);
+                    restoreResetButton();
+                    new MaterialAlertDialogBuilder(this)
+                            .setTitle("Password reset link sent")
+                            .setMessage("We've sent a password reset link to " + email
+                                    + ".\n\nCheck your inbox and Spam folder, then follow the link to set a new password.")
+                            .setPositiveButton("Got it", (dialog, which) -> dialog.dismiss())
+                            .show();
                 })
                 .addOnFailureListener(this, error -> {
-                    setLoading(false);
-                    AppUi.message(this, error.getLocalizedMessage() != null
-                            ? error.getLocalizedMessage() : "Unable to send reset link.");
+                    restoreResetButton();
+                    new MaterialAlertDialogBuilder(this)
+                            .setTitle("Couldn't send reset link")
+                            .setMessage(error.getLocalizedMessage() != null
+                                    ? error.getLocalizedMessage() : "Please check the email and try again.")
+                            .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
+                            .show();
                 });
+    }
+    private void restoreResetButton() {
+        sendingReset = false;
+        forgotLink.setEnabled(true);
+        forgotLink.setText(R.string.forgot_password);
+        setLoading(false);
     }
     private void setLoading(boolean loading) {
         loginButton.setEnabled(!loading);
+        forgotLink.setEnabled(!loading);
         progress.setVisibility(loading ? View.VISIBLE : View.GONE);
     }
 }
