@@ -1,3 +1,5 @@
-Step 1: Source project and Firebase libraries added.
-A genuine google-services.json must come from the student's own Firebase project.
-Firestore security rules are in firebase.rules. Do not fabricate credentials.
+Assignment 2 source status: four shopping screens + models + layouts + rules present.
+Source preflight: use python3 scripts/verify_source.py (Java syntax + XML/resources).
+Android Gradle compilation: not available in this authoring environment (no Android SDK).
+Firebase live test: requires the owner to create 8 Firestore documents and publish rules.
+GitHub: intentionally unchanged. After app testing, push in 5 milestones as instructed.

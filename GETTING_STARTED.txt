@@ -1,30 +1,19 @@
-SHOP EASE — Assignment 1 | Android Studio Java + XML
+ShopEase — Assignment 2 Android Studio Project (Java + XML)
 
-Open this repository's root folder in Android Studio and run the app on API 26+.
-App ID: pk.edu.nfciet.shopease
-The Android client Firebase configuration is at app/google-services.json.
+START HERE: ASSIGNMENT2_SETUP.txt
 
-Firebase project (Android client): shop-ease-228e9.
-The Android Google Services Gradle plugin selects the client registered as
-pk.edu.nfciet.shopease; another registered Android client may be in the same JSON.
-Enable Email/Password in Firebase Authentication and publish firebase.rules
-for the Cloud Firestore users/{uid} collection to enable registration/profile storage.
-These Firebase Console settings are NOT enabled simply by committing the JSON.
+This project extends the same ShopEase app from Assignment 1.
+Existing Splash, Login, Sign Up and Firebase client configuration are preserved.
+New screens: product grid, product detail, shopping cart, COD checkout.
 
-The main branch preserves the five required screen-by-screen assignment commits
-from assignment-1. PR #1 was merged without squashing:
-https://github.com/RaoFaisal10/ShopEase/pull/1
+App package: pk.edu.nfciet.shopease
+Compiled for Android SDK 36, minimum supported SDK 26.
+App version: 2.0
 
-Do not commit user passwords, Firebase Admin service-account credentials or private keys.
-The Android client configuration contains identifiers and an API key; the API key is
-not an administrator secret. Restrict Google Cloud API usage appropriately and
-enforce Firebase Authentication, security rules, and billing quotas.
+IMPORTANT: Products must be created in the user's FIRESTORE CONSOLE and
+firebase.rules must be published there. The ZIP cannot remotely mutate the
+owner's Firebase project and does not include a Firebase Admin key.
 
-Gradle 8.13 / Android Gradle Plugin 8.13.2 / Java 17 / compile SDK 36.
-Your local Android Studio ZIP may contain newer IDE-managed Gradle settings.
-The repository retains the version successfully compiled on GitHub Actions.
-The special gradle-wrapper.jar is a project-local bootstrap for Gradle 8.13.
-
-Generated directories (.gradle, .idea, build), local.properties, .git history
-and downloaded SDKs are intentionally not uploaded.
-The browser preview, when present, simulates UI and is not live Firebase.
+Includes the original Android Studio Gradle files, full Java/XML app, rules,
+8-item seed data, source verification script, and setup instructions.
+No GitHub push/commit and no production APK were generated in this environment.
