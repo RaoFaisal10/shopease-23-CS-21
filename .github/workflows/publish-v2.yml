@@ -1,0 +1,47 @@
+name: Publish ShopEase Assignment 2 v2.0
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/publish-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  publish:
+    name: Attach verified APK to v2.0
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Download APK from successful main-branch build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          gh run download 45022308518 --repo "$GITHUB_REPOSITORY" --name ShopEase-v2-debug-APK --dir dist
+          test -s dist/app-debug.apk
+          unzip -tqq dist/app-debug.apk
+          mv dist/app-debug.apk dist/shopease-23-CS-21-v2.0.apk
+          sha256sum dist/shopease-23-CS-21-v2.0.apk
+
+      - name: Publish v2.0 release and attach APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          APK=dist/shopease-23-CS-21-v2.0.apk
+          if gh release view v2.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload v2.0 "$APK" --clobber --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create v2.0 "$APK" --repo "$GITHUB_REPOSITORY" \
+              --target c03dc751437546b1c48177ab08b5a0d5ecad453c \
+              --title "ShopEase Assignment 2 (v2.0)" \
+              --notes "Assignment 2: Firestore product list, product details, cart and COD checkout.\n\nDevelopment: assignment-2 (five required milestone commits)\nPull request: #6 (merged)\nAttached APK: shopease-23-CS-21-v2.0.apk\n\nInstall on Android 8.0+; internet and configured Firebase access are required."
+          fi
+          gh release view v2.0 --repo "$GITHUB_REPOSITORY" --json assets --jq '.assets[].name' \
+            | grep -Fx 'shopease-23-CS-21-v2.0.apk'
