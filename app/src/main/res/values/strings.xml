@@ -41,4 +41,10 @@
  <string name="happy_here">We\'re happy you\'re here.</string>
  <string name="coming_soon_chip">COMING SOON</string>
  <string name="coming_soon_headline">Something good\nis on its way.</string>
+
+ <string name="a2_search_hint">Search for your next favorite…</string>
+ <string name="a2_cart">My bag</string>
+ <string name="a2_products">Discover the collection</string>
+ <string name="a2_checkout">Checkout</string>
+ <string name="a2_place_order">Place order</string>
 </resources>
